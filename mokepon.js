@@ -1,5 +1,7 @@
 let ataqueJugador
 let ataqueEnemigo
+let vidasJugador = 3;
+let vidasEnemigo = 3;
 
 function iniciarJuego(){
     let botonMascotaJugador = document.getElementById('boton-mascota');
@@ -13,6 +15,9 @@ function iniciarJuego(){
 
     let botonTierra = document.getElementById('boton-tierra');
     botonTierra.addEventListener('click', ataqueTierra);
+
+    let botonReiniciar = document.getElementById('boton-reiniciar')
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 
 }
 
@@ -73,12 +78,68 @@ function ataqueAleatorioEnemigo() {
         ataqueEnemigo = 'Tierra'
     }
 
-    crearMensaje();
+    combate();
 }
 
-function crearMensaje(){
+function combate(){
+    let spanVidasJugador = document.getElementById('vidas-jugador')
+    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
+
+    if (ataqueJugador == ataqueEnemigo){
+        crearMensaje("DRAW")
+    }else if ((ataqueJugador == 'Fuego' && ataqueEnemigo == 'Tierra') || (ataqueJugador == 'Agua' && ataqueEnemigo == 'Fuego') || (ataqueJugador == 'Tierra' && ataqueEnemigo == 'Agua')){
+        crearMensaje("You Win")
+
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
+    }else{
+        crearMensaje("You Lose")
+        vidasJugador--
+        spanVidasJugador.innerHTML = vidasJugador
+    }
+
+    revisarVidas()
+
+}
+
+function revisarVidas(){
+    if(vidasEnemigo == 0){
+        crearMensajeFinal("CONGRATULATIONS!! YOU HAVE WON :)")
+    }else if (vidasJugador == 0){
+        crearMensajeFinal("I'm sorry you lost :'(")
+    }
+}
+
+function crearMensaje(resultado){
+    let sectionMensajes = document.getElementById('mensajes')
+
     let parrafo = document.createElement('p')
-    parrafo = 'Tu mascota atacó con '+ ataqueJugador +', la mascota del enemigo atacó con ' + ataqueEnemigo + ' - GANASTE🎉'
+    parrafo.innerHTML = 'Tu mascota atacó con '+ ataqueJugador +', la mascota del enemigo atacó con ' + ataqueEnemigo + ' - ' + resultado
+
+    sectionMensajes.appendChild(parrafo);
+}
+
+function crearMensajeFinal(resultadoFinal){
+    let sectionMensajes = document.getElementById('mensajes')
+
+    let parrafo = document.createElement('p')
+    parrafo.innerHTML = resultadoFinal
+
+    sectionMensajes.appendChild(parrafo);
+
+    let botonFuego = document.getElementById('boton-fuego');
+    botonFuego.disabled = true
+
+    let botonAgua = document.getElementById('boton-agua');
+    botonAgua.disabled = true
+
+    let botonTierra = document.getElementById('boton-tierra');
+    botonTierra.disabled = true
+}
+
+function reiniciarJuego(){
+    location.reload()
+
 }
 
 function aleatorio(min, max){
