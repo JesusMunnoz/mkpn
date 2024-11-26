@@ -1,0 +1,35 @@
+/*h1{
+    color: lightcoral;
+}
+.titulo{
+    background-color: crimson;
+}
+#ttl{
+    border: 2px solid black;
+}*/
+
+.titulo{
+    color: hotpink;
+    width: 325px;
+    height: 50px;
+    background-color: teal;
+}
+
+#seleccionar-mascota{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.tarjeta-de-mokepon{
+    width: 100px;
+    height: 100px;
+    background-color: aquamarine;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid hotpink;
+}
+input{
+    display: none;
+}
