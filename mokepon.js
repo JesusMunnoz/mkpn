@@ -98,14 +98,13 @@ function combate(){
     let spanVidasEnemigo = document.getElementById('vidas-enemigo')
 
     if (ataqueJugador == ataqueEnemigo){
-        crearMensaje("DRAW")
+        crearMensaje("EMPATE")
     }else if ((ataqueJugador == 'Fuego' && ataqueEnemigo == 'Tierra') || (ataqueJugador == 'Agua' && ataqueEnemigo == 'Fuego') || (ataqueJugador == 'Tierra' && ataqueEnemigo == 'Agua')){
-        crearMensaje("You Win")
-
+        crearMensaje("GANASTE")
         vidasEnemigo--
         spanVidasEnemigo.innerHTML = vidasEnemigo
     }else{
-        crearMensaje("You Lose")
+        crearMensaje("PERDISTE")
         vidasJugador--
         spanVidasJugador.innerHTML = vidasJugador
     }
@@ -116,9 +115,9 @@ function combate(){
 
 function revisarVidas(){
     if(vidasEnemigo == 0){
-        crearMensajeFinal("CONGRATULATIONS!! YOU HAVE WON :)")
+        crearMensajeFinal("FELICITACIONES! Ganaste :)")
     }else if (vidasJugador == 0){
-        crearMensajeFinal("I'm sorry you lost :'(")
+        crearMensajeFinal("Lo siento, perdiste :(")
     }
 }
 
@@ -134,10 +133,6 @@ function crearMensaje(resultado){
     nuevoAtaqueDelJugador.innerHTML = ataqueJugador;
     nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo;
 
-    //let parrafo = document.createElement('p')
-    //parrafo.innerHTML = 'Tu mascota atacó con '+ ataqueJugador +', la mascota del enemigo atacó con ' + ataqueEnemigo + ' - ' + resultado
-
-    //sectionMensajes.appendChild(notificacion);
     ataquesDelJugador.appendChild(nuevoAtaqueDelJugador);
     ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo);
 }
@@ -145,10 +140,7 @@ function crearMensaje(resultado){
 function crearMensajeFinal(resultadoFinal){
     let sectionMensajes = document.getElementById('resultado')
 
-    //let parrafo = document.createElement('p')
     sectionMensajes.innerHTML = resultadoFinal
-
-    //sectionMensajes.appendChild(parrafo);
 
     let botonFuego = document.getElementById('boton-fuego');
     botonFuego.disabled = true
@@ -159,13 +151,12 @@ function crearMensajeFinal(resultadoFinal){
     let botonTierra = document.getElementById('boton-tierra');
     botonTierra.disabled = true
 
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque');
+    let sectionSeleccionarAtaque = document.getElementById('reiniciar');
     sectionSeleccionarAtaque.style.display = 'block'
 }
 
 function reiniciarJuego(){
     location.reload()
-
 }
 
 function aleatorio(min, max){
@@ -173,4 +164,3 @@ function aleatorio(min, max){
 }
 
 window.addEventListener('load', iniciarJuego) // para poner <script> al inicio
-
